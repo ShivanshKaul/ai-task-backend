@@ -19,6 +19,11 @@ app.use(cors({
 
 const users = []; 
 
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
+
+
 // ✅ Signup
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
