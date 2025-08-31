@@ -24,11 +24,21 @@ app.get("/", (req, res) => {
 app.post("/signup", async (req, res) => {
   const { username, password } = req.body;
 
+  // Check if user already exists
+  const existing = users.find((u) => u.username === username);
+  if (existing) return res.status(400).json({ error: "User already exists" });
+
   const hashed = await bcrypt.hash(password, 10);
   users.push({ username, password: hashed });
 
-  res.json({ success: true, message: "User registered" });
+  // 🔑 Issue JWT right away (same as login)
+  const token = jwt.sign({ username }, process.env.JWT_SECRET, {
+    expiresIn: "1h",
+  });
+
+  res.json({ success: true, token });
 });
+
 
 // ✅ Login
 app.post("/login", async (req, res) => {
