@@ -32,9 +32,7 @@ app.post("/signup", async (req, res) => {
   users.push({ username, password: hashed });
 
   // 🔑 Issue JWT right away (same as login)
-  const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign({ username }, process.env.JWT_SECRET);
 
   res.json({ success: true, token });
 });
@@ -50,9 +48,7 @@ app.post("/login", async (req, res) => {
   const match = await bcrypt.compare(password, user.password);
   if (!match) return res.status(400).json({ error: "Invalid credentials" });
 
-  const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-    expiresIn: "1h",
-  });
+  const token = jwt.sign({ username }, process.env.JWT_SECRET);
 
   res.json({ token });
 });
