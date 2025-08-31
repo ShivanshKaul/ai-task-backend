@@ -12,7 +12,7 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://ai-task-frontend.vercel.app/",
   methods: ["GET", "POST", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
