@@ -11,11 +11,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json());
 
-app.use(cors({
-  origin: "https://ai-task-frontend.vercel.app/",
-  methods: ["GET", "POST", "PATCH"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+app.use(cors());
 
 const users = []; 
 
